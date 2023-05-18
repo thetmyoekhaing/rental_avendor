@@ -8,7 +8,7 @@ class ApiModel {
 
   ApiModel({required this.baseUrl});
 
-  Future<Response> fetchApi({String? route}) async {
+  Future<Map<String, dynamic>> fetchApi({String? route}) async {
     if (route == null || route == '') {
       return throw Exception("need a route to fetch");
     }

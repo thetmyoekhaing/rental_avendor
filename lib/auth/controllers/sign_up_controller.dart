@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:rental_vendor/api/api_model.dart';
-import 'package:rental_vendor/api/base_url.dart';
 import 'package:rental_vendor/auth/models/sign_up_model.dart';
+import 'package:rental_vendor/constants/constants.dart';
 import 'package:rental_vendor/screens/home_screen.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,6 +32,7 @@ class SignUpController {
         // Navigator.of(context).pushReplacement(MaterialPageRoute(
         //   builder: (context) => const Home(),
         // ));
+        pref.getString("authToken");
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(resData["message"])),

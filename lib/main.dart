@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rental_vendor/constants/constants.dart';
 import 'package:rental_vendor/screens/home_screen.dart';
+// import 'package:rental_vendor/screens/home_screen.dart';
 import 'package:rental_vendor/screens/no_route_screen.dart';
 import 'package:rental_vendor/screens/sign_in_screen.dart';
 import 'package:rental_vendor/screens/sign_up_screen.dart';
@@ -25,16 +27,23 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(
               builder: (context) => const SignInScreen(),
             );
+
+          case "/home":
+            return MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            );
+
           default:
             return MaterialPageRoute(
               builder: (context) => const NoRouteScreen(),
             );
         }
       },
+      initialRoute: "/home",
       title: 'Rental Vendor',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          // primarySwatch: primarySwatchColor,
+          ),
     );
   }
 }

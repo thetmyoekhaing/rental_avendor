@@ -32,8 +32,8 @@ class Auth extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(20),
-                width: 400,
-                height: isLogin ? 350 : 600,
+                width: 350,
+                height: isLogin ? 400 : 700,
                 margin: const EdgeInsets.only(top: 25),
                 decoration: const BoxDecoration(
                     color: Colors.white,
@@ -94,9 +94,7 @@ class Auth extends StatelessWidget {
                           child: Text(btnText ?? "Register"),
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
+
                       TextButton(
                           onPressed: () {
                             isLogin
