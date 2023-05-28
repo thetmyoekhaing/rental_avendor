@@ -14,7 +14,7 @@ Vendor _$VendorFromJson(Map<String, dynamic> json) => Vendor(
       joinDate: json['join_date'] as String?,
       address: json['address'] as String?,
       authToken: json['auth_token'] as String?,
-      id: json['id'] as String?,
+      id: json['_id'] as String?,
       status: json['status'] as int?,
     );
 
@@ -27,5 +27,5 @@ Map<String, dynamic> _$VendorToJson(Vendor instance) => <String, dynamic>{
       'address': instance.address,
       'status': instance.status,
       'auth_token': instance.authToken,
-      'id': instance.id,
+      '_id': instance.id,
     };

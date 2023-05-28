@@ -4,9 +4,7 @@ class CustomSnackBar {
   final String message;
   CustomSnackBar({required this.message});
 
-  void showSnackBar(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+  Widget showSnackBar(BuildContext context) {
+    return SnackBar(content: Text(message));
   }
 }

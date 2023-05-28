@@ -1,6 +1,6 @@
 {
-    "name": "rental_vendor",
-    "short_name": "rental_vendor",
+    "name": "rental_avendor",
+    "short_name": "rental_avendor",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

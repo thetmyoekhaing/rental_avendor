@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rental_vendor/home/controllers/brands_controller.dart';
+import 'package:rental_vendor/brands/controller/brands_controller.dart';
+import 'package:rental_vendor/config/ui/snack_bar.dart';
 
 class Brands extends StatelessWidget {
   const Brands({super.key});
@@ -11,16 +12,16 @@ class Brands extends StatelessWidget {
     return Column(
       children: [
         const Text("Brands"),
-        FutureBuilder<void>(
+        FutureBuilder(
           future: brands,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
-              // } else if (snapshot.hasError) {
-              //   return
+            } else if (snapshot.hasError) {
+              return CustomSnackBar(message: snapshot.error.toString())
+                  .showSnackBar(context);
             } else {
-              // Return a widget based on the data or lack thereof
-              return Text('Data loaded successfully!');
+              return Text("success");
             }
           },
         )

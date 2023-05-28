@@ -4,8 +4,8 @@
 # This file should be version controlled.
 
 version:
-  revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
-  channel: stable
+  revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
+  channel: master
 
 project_type: app
 
@@ -13,26 +13,26 @@ project_type: app
 migration:
   platforms:
     - platform: root
-      create_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
-      base_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
+      create_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
+      base_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
     - platform: android
-      create_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
-      base_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
+      create_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
+      base_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
     - platform: ios
-      create_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
-      base_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
+      create_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
+      base_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
     - platform: linux
-      create_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
-      base_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
+      create_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
+      base_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
     - platform: macos
-      create_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
-      base_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
+      create_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
+      base_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
     - platform: web
-      create_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
-      base_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
+      create_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
+      base_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
     - platform: windows
-      create_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
-      base_revision: 90c64ed42ba53a52d18f0cb3b17666c8662ed2a0
+      create_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
+      base_revision: f86c529b2cd28886e9e12d658de4d5c294c9de13
 
   # User provided section
 

@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rental_vendor/api/api_model.dart';
 import 'package:rental_vendor/auth/models/sign_up_model.dart';
+import 'package:rental_vendor/config/ui/snack_bar.dart';
 import 'package:rental_vendor/constants/constants.dart';
-import 'package:rental_vendor/screens/home_screen.dart';
+import 'package:rental_vendor/screens/main_screen.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,17 +27,15 @@ class SignUpController {
         .postApi(route: "/register", jsonData: signUpModel.toJson())
         .then((resData) async {
       if (resData["error"] == false) {
-        SharedPreferences pref = await SharedPreferences.getInstance();
-        final Vendor vendor = Vendor.fromJson(resData["data"]);
-        await pref.setString("authToken", vendor.authToken!);
+        // SharedPreferences pref = await SharedPreferences.getInstance();
+        // final Vendor vendor = Vendor.fromJson(resData["data"]);
+        // await pref.setString("authToken", vendor.authToken!);
         // Navigator.of(context).pushReplacement(MaterialPageRoute(
         //   builder: (context) => const Home(),
         // ));
-        pref.getString("authToken");
+        // pref.getString("authToken");
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(resData["message"])),
-        );
+        CustomSnackBar(message: resData["message"]).showSnackBar(context);
       }
       completer.complete();
     });

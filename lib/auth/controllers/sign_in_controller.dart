@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rental_vendor/api/api_model.dart';
 import 'package:rental_vendor/auth/models/sign_in_model.dart';
+import 'package:rental_vendor/config/ui/snack_bar.dart';
 import 'package:rental_vendor/constants/constants.dart';
+import 'package:rental_vendor/home/view/profile.dart';
+import 'package:rental_vendor/screens/main_screen.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInController {
   TextEditingController emailController = TextEditingController();
@@ -14,23 +17,23 @@ class SignInController {
   SignInModel signInModel = SignInModel();
 
   Future<void> onPressed(BuildContext context) {
+    final vendorProvider = Provider.of<Vendor>(context, listen: false);
     final Completer<void> completer = Completer<void>();
 
     apiModel
         .postApi(route: "/login", jsonData: signInModel.toJson())
         .then((resData) async {
       if (resData["error"] == false) {
-        SharedPreferences pref = await SharedPreferences.getInstance();
         final Vendor vendor = Vendor.fromJson(resData["data"]);
-        await pref.setString("authToken", vendor.authToken!);
-        // Navigator.of(context).pushReplacement(MaterialPageRoute(
-        //   builder: (context) => const Home(),
-        // ));
-        pref.getString("authToken");
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(resData["message"])),
+        vendorProvider.addVendorData(vendor: vendor);
+        vendorProvider.setToken();
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => MainScreen(),
+          ),
         );
+      } else {
+        CustomSnackBar(message: resData["message"]).showSnackBar(context);
       }
       completer.complete();
     });
