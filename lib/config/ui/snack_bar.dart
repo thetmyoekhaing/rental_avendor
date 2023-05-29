@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomSnackBar {
-  final String message;
-  CustomSnackBar({required this.message});
+  final String? message;
 
-  Widget showSnackBar(BuildContext context) {
-    return SnackBar(content: Text(message));
+  CustomSnackBar({this.message});
+
+  void showSnackBar(BuildContext context) {
+    if (message != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message!)),
+      );
+    }
   }
 }

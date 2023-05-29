@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:rental_vendor/config/ui/snack_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'vendor_model.g.dart';
 
@@ -46,6 +47,20 @@ class Vendor with ChangeNotifier {
     } else {
       throw Exception("Auth Token is null");
     }
+    notifyListeners();
+  }
+
+  Future<String?> getToken() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    final token = pref.getString("AuthToken");
+    if (token != null) return token;
+    return null;
+  }
+
+  Future<void> removeToken() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.remove("AuthToken");
+    print(pref.getString("AuthToken"));
     notifyListeners();
   }
 

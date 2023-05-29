@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'brand_model.g.dart';
 
 @JsonSerializable()
-class Brand with ChangeNotifier {
+class Brand {
   @JsonKey(name: "_id")
   String? id;
   String? name;
@@ -14,11 +14,21 @@ class Brand with ChangeNotifier {
 
   /// Connect the generated [_$BrandToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$BrandToJson(this);
+}
 
-  void addBrandData({required Brand brand}) {
-    print("${brand.id} // ${brand.name}");
-    id = brand.id;
-    name = brand.name;
-    notifyListeners();
+class BrandList with ChangeNotifier {
+  List<Brand> brandsList = [];
+
+  void addBrands({required Brand brand}) {
+    bool isBrandExists =
+        brandsList.any((existingBrand) => existingBrand.id == brand.id);
+    if (!isBrandExists) {
+      brandsList.add(brand);
+      notifyListeners();
+    }
+  }
+
+  List<Brand> getBrandsList() {
+    return brandsList;
   }
 }

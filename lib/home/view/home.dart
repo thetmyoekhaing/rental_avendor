@@ -96,93 +96,103 @@ class Home extends StatelessWidget {
           ),
 
           // grid card
-          GridView.count(
-            childAspectRatio: 1.3,
-            shrinkWrap: true,
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            children: DrawerMenuList.menuList.map((menu) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    switch (menu.menuName) {
-                      case "Home":
-                        CustomSnackBar(message: "You're alredy in Home Page")
-                            .showSnackBar(context);
-                        break;
+          Expanded(
+            child: GridView.count(
+              childAspectRatio: 1.3,
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              children: DrawerMenuList.menuList.map((menu) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      switch (menu.menuName) {
+                        case "Home":
+                          CustomSnackBar(message: "You're alredy in Home Page")
+                              .showSnackBar(context);
+                          break;
 
-                      default:
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) {
-                            return MainScreen(
-                              body: menu.menuPage,
-                            );
-                          },
-                        ));
-                        break;
-                    }
-                  },
-                  child: Card(
-                    margin: const EdgeInsets.all(0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [pictionBlue, cereluan],
+                        case 'Log Out':
+                          vendorProvider.removeToken();
+                          Navigator.of(context).pushReplacementNamed('/');
+                          break;
+
+                        default:
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return MainScreen(
+                                  body: menu.menuPage,
+                                );
+                              },
+                            ),
+                          );
+                          break;
+                      }
+                    },
+                    child: Card(
+                      margin: const EdgeInsets.all(0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [pictionBlue, cereluan],
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: richBlack.withOpacity(0.5),
-                                      blurRadius: 1,
-                                      spreadRadius: 3,
-                                      offset: const Offset(2, 2))
-                                ],
-                                color: white,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Icon(menu.icon),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  menu.menuName,
-                                  style: const TextStyle(
-                                      color: white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                const Icon(
-                                  Icons.touch_app,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: richBlack.withOpacity(0.5),
+                                        blurRadius: 1,
+                                        spreadRadius: 3,
+                                        offset: const Offset(2, 2))
+                                  ],
                                   color: white,
-                                )
-                              ],
-                            )
-                          ],
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Icon(menu.icon),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    menu.menuName,
+                                    style: const TextStyle(
+                                        color: white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  const Icon(
+                                    Icons.touch_app,
+                                    color: white,
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),

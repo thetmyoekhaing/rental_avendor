@@ -7,8 +7,8 @@ final MultiProvider providers = MultiProvider(
     ChangeNotifierProvider<Vendor>(
       create: (context) => Vendor(),
     ),
-    ChangeNotifierProvider<Brand>(
-      create: (context) => Brand(),
+    ChangeNotifierProvider<BrandList>(
+      create: (context) => BrandList(),
     )
   ],
 );

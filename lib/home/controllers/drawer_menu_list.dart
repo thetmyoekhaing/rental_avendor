@@ -4,6 +4,7 @@ import 'package:rental_vendor/brands/view/brands.dart';
 import 'package:rental_vendor/home/view/categories.dart';
 import 'package:rental_vendor/home/view/products.dart';
 import 'package:rental_vendor/home/view/profile.dart';
+import 'package:rental_vendor/home/view/user_rent.dart';
 import 'package:rental_vendor/screens/main_screen.dart';
 
 class DrawerMenuList {
@@ -21,9 +22,14 @@ class DrawerMenuList {
       menuPage: const Products(),
     ),
     DrawerModel(
+        icon: Icons.supervised_user_circle,
+        menuName: "User Rents",
+        menuPage: const UserRent()),
+    DrawerModel(
       icon: Icons.person,
       menuName: "Profile",
       menuPage: const Profile(),
     ),
+    DrawerModel(icon: Icons.logout, menuName: "Log Out")
   ];
 }

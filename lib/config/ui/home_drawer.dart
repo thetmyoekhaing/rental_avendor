@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rental_vendor/constants/constants.dart';
 import 'package:rental_vendor/home/controllers/drawer_menu_list.dart';
 import 'package:rental_vendor/screens/main_screen.dart';
+import 'package:rental_vendor/vendors/models/vendor_model.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final vendorProvider = Provider.of<Vendor>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Container(
@@ -43,6 +47,11 @@ class HomeDrawer extends StatelessWidget {
                               },
                             ),
                           );
+                          break;
+
+                        case 'Log Out':
+                          vendorProvider.removeToken();
+                          Navigator.of(context).pushReplacementNamed('/');
                           break;
 
                         default:
