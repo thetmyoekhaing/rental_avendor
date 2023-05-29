@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_vendor/api/api_model.dart';
-import 'package:rental_vendor/brands/model/brand_model.dart';
-import 'package:rental_vendor/config/ui/snack_bar.dart';
+import 'package:rental_vendor/business/model/business_model.dart';
 import 'package:rental_vendor/constants/constants.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
 
-class BrandsController {
+class BusinessController {
   ApiModel apiModel = ApiModel(baseUrl: baseUrl);
 
-  Future<List<Brand>> fetchBrands(BuildContext context) async {
+  Future<List<Business>> fetchBrands(BuildContext context) async {
     final vendorProvider = Provider.of<Vendor>(context, listen: false);
-    final brandListProvider = Provider.of<BrandList>(context, listen: false);
+    final businessListProvider =
+        Provider.of<BusinessList>(context, listen: false);
     final resData = await apiModel.fetchApi(
-      route: "/brands",
+      route: "/business",
       id: vendorProvider.id,
       whichId: "vendor_id",
       token: vendorProvider.authToken,
@@ -23,14 +23,14 @@ class BrandsController {
 
     if (resData['error'] == false) {
       final List<dynamic> data = resData['data'];
-      for (var oneBrand in data) {
-        final Brand brand = Brand.fromJson(oneBrand);
+      for (var oneItem in data) {
+        final Business business = Business.fromJson(oneItem);
         // print(brand.name);
-        brandListProvider.addBrands(brand: brand);
+        businessListProvider.addBusinesses(business: business);
       }
     } else {
       throw Exception("Error on brand controller ${resData['message']}");
     }
-    return brandListProvider.getBrandsList();
+    return businessListProvider.getBusinessList();
   }
 }

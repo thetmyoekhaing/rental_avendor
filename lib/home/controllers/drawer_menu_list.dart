@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rental_vendor/business/view/businesses.dart';
 import 'package:rental_vendor/home/models/drawer_model.dart';
 import 'package:rental_vendor/brands/view/brands.dart';
-import 'package:rental_vendor/home/view/categories.dart';
+import 'package:rental_vendor/categories/view/categories.dart';
 import 'package:rental_vendor/home/view/products.dart';
 import 'package:rental_vendor/home/view/profile.dart';
 import 'package:rental_vendor/home/view/user_rent.dart';
@@ -22,9 +23,15 @@ class DrawerMenuList {
       menuPage: const Products(),
     ),
     DrawerModel(
-        icon: Icons.supervised_user_circle,
-        menuName: "User Rents",
-        menuPage: const UserRent()),
+      icon: Icons.business_center,
+      menuName: "Business",
+      menuPage: const Businesses(),
+    ),
+    DrawerModel(
+      icon: Icons.supervised_user_circle,
+      menuName: "User Rents",
+      menuPage: const UserRent(),
+    ),
     DrawerModel(
       icon: Icons.person,
       menuName: "Profile",
