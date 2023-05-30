@@ -12,6 +12,8 @@ class BrandsController {
   Future<List<Brand>> fetchBrands(BuildContext context) async {
     final vendorProvider = Provider.of<Vendor>(context, listen: false);
     final brandListProvider = Provider.of<BrandList>(context, listen: false);
+    // final vendor = await vendorProvider.getVendor();
+    // print(vendor);
     final resData = await apiModel.fetchApi(
       route: "/brands",
       id: vendorProvider.id,

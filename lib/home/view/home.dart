@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rental_vendor/config/ui/snack_bar.dart';
 import 'package:rental_vendor/constants/constants.dart';
 import 'package:rental_vendor/home/controllers/drawer_menu_list.dart';
+import 'package:rental_vendor/main.dart';
 import 'package:rental_vendor/screens/main_screen.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
 
@@ -116,7 +117,11 @@ class Home extends StatelessWidget {
 
                         case 'Log Out':
                           vendorProvider.removeToken();
-                          Navigator.of(context).pushReplacementNamed('/');
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return const MyApp();
+                            },
+                          ));
                           break;
 
                         default:

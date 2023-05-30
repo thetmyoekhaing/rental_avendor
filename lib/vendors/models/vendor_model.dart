@@ -43,7 +43,7 @@ class Vendor with ChangeNotifier {
     if (authToken != null) {
       SharedPreferences pref = await SharedPreferences.getInstance();
       await pref.setString("AuthToken", authToken!);
-      print(pref.getString("AuthToken"));
+      // print(pref.getString("AuthToken"));
     } else {
       throw Exception("Auth Token is null");
     }
@@ -53,6 +53,7 @@ class Vendor with ChangeNotifier {
   Future<String?> getToken() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     final token = pref.getString("AuthToken");
+    // print("token from getToken -> $token");
     if (token != null) return token;
     return null;
   }
@@ -60,9 +61,29 @@ class Vendor with ChangeNotifier {
   Future<void> removeToken() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.remove("AuthToken");
-    print(pref.getString("AuthToken"));
+    // print(pref.getString("AuthToken"));
     notifyListeners();
   }
+
+  // Future<void> setVendor({required Vendor vendor}) async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   if (pref.getString("AuthToken") != null) {
+  //     pref.setString("Vendor", vendor.toString());
+  //   } else {
+  //     throw Exception("Token is null , failed to set Vendor");
+  //   }
+  //   notifyListeners();
+  // }
+
+  // Future<String> getVendor() async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   final vendor = pref.getString("Vendor");
+  //   if (vendor != null) {
+  //     return vendor;
+  //   } else {
+  //     throw Exception("Vendor data is null , cant get dat");
+  //   }
+  // }
 
   void addVendorData({required Vendor vendor}) {
     // print("add -> ${vendor.name}");

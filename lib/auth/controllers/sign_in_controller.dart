@@ -6,7 +6,6 @@ import 'package:rental_vendor/api/api_model.dart';
 import 'package:rental_vendor/auth/models/sign_in_model.dart';
 import 'package:rental_vendor/config/ui/snack_bar.dart';
 import 'package:rental_vendor/constants/constants.dart';
-import 'package:rental_vendor/home/view/profile.dart';
 import 'package:rental_vendor/screens/main_screen.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
 

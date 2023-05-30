@@ -15,59 +15,64 @@ void main() {
   ));
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
     final vendorProvider = Provider.of<Vendor>(context, listen: false);
+    // print("object");
     return FutureBuilder<String?>(
         future: vendorProvider.getToken(),
         builder: (context, snapshot) {
+          // print(snapshot.connectionState == ConnectionState.done);
           final String? token = snapshot.data;
-          return MaterialApp(
-            onGenerateRoute: (settings) {
-              switch (settings.name) {
-                case "/":
-                  return MaterialPageRoute(
-                    builder: (context) =>
-                        token == null ? const SignUpScreen() : MainScreen(),
-                  );
+          // print("token --> $token");
+          if (snapshot.connectionState == ConnectionState.done) {
+            print("token -----> $token");
+            // print(vendorProvider.authToken);
+            return MaterialApp(
+              onGenerateRoute: (settings) {
+                switch (settings.name) {
+                  case "/":
+                    return MaterialPageRoute(
+                      builder: (context) =>
+                          token == null ? const SignUpScreen() : MainScreen(),
+                    );
 
-                case "/login":
-                  return MaterialPageRoute(
-                    builder: (context) => const SignInScreen(),
-                  );
+                  case "/login":
+                    return MaterialPageRoute(
+                      builder: (context) => const SignInScreen(),
+                    );
 
-                case "/home":
-                  return MaterialPageRoute(
-                    builder: (context) => MainScreen(),
-                  );
+                  case "/home":
+                    return MaterialPageRoute(
+                      builder: (context) => MainScreen(),
+                    );
 
-                default:
-                  return MaterialPageRoute(
-                    builder: (context) => const NoRouteScreen(),
-                  );
-              }
-            },
-            initialRoute: '/',
-            title: 'Rental Vendor',
-            theme: ThemeData(
-              useMaterial3: true,
-              // primarySwatch: primarySwatchColor,
-            ),
-          );
+                  default:
+                    return MaterialPageRoute(
+                      builder: (context) => const NoRouteScreen(),
+                    );
+                }
+              },
+              initialRoute: '/',
+              title: 'Rental Vendor',
+              theme: ThemeData(
+                useMaterial3: true,
+                // primarySwatch: primarySwatchColor,
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else {
+            return const Center(
+              child: Text("Fetching data ..."),
+            );
+          }
         });
   }
 }
-
-
-
 
 // class _MyAppState extends State<MyApp> {
 //   @override

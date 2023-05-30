@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:rental_vendor/config/ui/crud_listview.dart';
 import 'package:rental_vendor/constants/constants.dart';
+import 'package:rental_vendor/products/view/product_grid.dart';
 
 class CrudUI extends StatelessWidget {
-  bool isBusinesses;
+  bool isProducts;
   String name;
-  VoidCallback? onPressed;
+  bool isBusinesses;
   Future<List<dynamic>>? futureFunc;
+  VoidCallback? onPressed;
   VoidCallback? editOnPressed;
   VoidCallback? deleteOnPressed;
   CrudUI(
@@ -13,6 +16,7 @@ class CrudUI extends StatelessWidget {
       required this.name,
       required this.futureFunc,
       this.isBusinesses = false,
+      this.isProducts = false,
       this.onPressed,
       this.deleteOnPressed,
       this.editOnPressed});
@@ -53,8 +57,39 @@ class CrudUI extends StatelessWidget {
               ),
             ),
           ),
+          const Divider(
+            color: prussianBlue,
+            thickness: 20,
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            decoration: const BoxDecoration(
+              color: prussianBlue,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Name',
+                  style: TextStyle(color: white, fontSize: 20),
+                ),
+                isBusinesses
+                    ? const Text(
+                        "Address",
+                        style: TextStyle(color: white, fontSize: 20),
+                      )
+                    : Container(),
+                const SizedBox(
+                  width: 60,
+                )
+              ],
+            ),
+          ),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
           FutureBuilder<List>(
             future: futureFunc,
@@ -66,77 +101,16 @@ class CrudUI extends StatelessWidget {
                 return const Text("error fetching data");
               } else {
                 final List list = snapshot.data!;
-                return Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      final oneItem = list[index];
-                      return Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
-                            decoration: BoxDecoration(
-                              color: prussianBlue,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  oneItem.name ?? '',
-                                  style: const TextStyle(
-                                      color: white, fontSize: 20),
-                                ),
-                                isBusinesses
-                                    ? Text(
-                                        oneItem.address ?? '',
-                                        style: const TextStyle(
-                                            color: white, fontSize: 20),
-                                      )
-                                    : Container(),
-                                Row(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: editOnPressed ?? () {},
-                                      child: Container(
-                                        padding: const EdgeInsets.all(7),
-                                        decoration: BoxDecoration(
-                                          color: pictionBlue,
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: const Text(
-                                          "Edit",
-                                          style: TextStyle(color: white),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    IconButton(
-                                      onPressed: deleteOnPressed ?? () {},
-                                      icon: const Icon(
-                                        Icons.delete,
-                                        size: 30,
-                                        color: Colors.redAccent,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          )
-                        ],
-                      );
-                    },
-                  ),
-                );
+                return isProducts
+                    ? ProductGrid(
+                        productList: list,
+                      )
+                    : CRUDListView(
+                        list: list,
+                        isBusinesses: isBusinesses,
+                        deleteOnPressed: deleteOnPressed,
+                        editOnPressed: editOnPressed,
+                        onPressed: onPressed);
               }
             },
           )

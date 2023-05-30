@@ -3,7 +3,7 @@ import 'package:rental_vendor/business/view/businesses.dart';
 import 'package:rental_vendor/home/models/drawer_model.dart';
 import 'package:rental_vendor/brands/view/brands.dart';
 import 'package:rental_vendor/categories/view/categories.dart';
-import 'package:rental_vendor/home/view/products.dart';
+import 'package:rental_vendor/products/view/products.dart';
 import 'package:rental_vendor/home/view/profile.dart';
 import 'package:rental_vendor/home/view/user_rent.dart';
 import 'package:rental_vendor/screens/main_screen.dart';
