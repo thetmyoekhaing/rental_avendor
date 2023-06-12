@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'brand_model.g.dart';
 
@@ -16,7 +16,7 @@ class Brand {
   Map<String, dynamic> toJson() => _$BrandToJson(this);
 }
 
-class BrandList with ChangeNotifier {
+class BrandList extends GetxController {
   List<Brand> brandsList = [];
 
   void addBrands({required Brand brand}) {
@@ -24,7 +24,6 @@ class BrandList with ChangeNotifier {
         brandsList.any((existingBrand) => existingBrand.id == brand.id);
     if (!isBrandExists) {
       brandsList.add(brand);
-      notifyListeners();
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'category_model.g.dart';
 
@@ -16,14 +17,13 @@ class CategoryModel {
   Map<String, dynamic> toJson() => _$CategoryModelToJson(this);
 }
 
-class CategoryList with ChangeNotifier {
+class CategoryList extends GetxController {
   List<CategoryModel> catList = [];
 
   void addCats({required CategoryModel cat}) {
-    bool isCatExists = catList.any((exitstingCat) => exitstingCat.id == cat.id);
+    bool isCatExists = catList.any((existingCat) => existingCat.id == cat.id);
     if (!isCatExists) {
       catList.add(cat);
-      notifyListeners();
     }
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:rental_vendor/constants/constants.dart';
 import 'package:rental_vendor/providers/provider.dart';
 import 'package:rental_vendor/screens/main_screen.dart';
 import 'package:rental_vendor/screens/no_route_screen.dart';
@@ -9,10 +9,8 @@ import 'package:rental_vendor/screens/sign_up_screen.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [providers],
-    child: const MyApp(),
-  ));
+  getStates();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,10 +18,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vendorProvider = Provider.of<Vendor>(context, listen: false);
-    // print("object");
+    final Vendor vendorState = Get.find(); // print("object");
     return FutureBuilder<String?>(
-        future: vendorProvider.getToken(),
+        future: vendorState.getToken(),
         builder: (context, snapshot) {
           // print(snapshot.connectionState == ConnectionState.done);
           final String? token = snapshot.data;

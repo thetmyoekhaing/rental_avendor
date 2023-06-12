@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'business_model.g.dart';
 
@@ -18,7 +19,7 @@ class Business {
   Map<String, dynamic> toJson() => _$BusinessToJson(this);
 }
 
-class BusinessList with ChangeNotifier {
+class BusinessList extends GetxController {
   List<Business> businessList = [];
 
   void addBusinesses({required Business business}) {
@@ -26,7 +27,6 @@ class BusinessList with ChangeNotifier {
         .any((exitstingBusiness) => exitstingBusiness.id == business.id);
     if (!isBusinessExists) {
       businessList.add(business);
-      notifyListeners();
     }
   }
 

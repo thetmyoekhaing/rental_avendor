@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_vendor/api/api_model.dart';
 import 'package:rental_vendor/auth/models/sign_in_model.dart';
@@ -16,7 +17,7 @@ class SignInController {
   SignInModel signInModel = SignInModel();
 
   Future<void> onPressed(BuildContext context) {
-    final vendorProvider = Provider.of<Vendor>(context, listen: false);
+final Vendor vendorState = Get.find();
     final Completer<void> completer = Completer<void>();
 
     apiModel
@@ -24,8 +25,8 @@ class SignInController {
         .then((resData) async {
       if (resData["error"] == false) {
         final Vendor vendor = Vendor.fromJson(resData["data"]);
-        vendorProvider.addVendorData(vendor: vendor);
-        vendorProvider.setToken();
+        vendorState.addVendorData(vendor: vendor);
+        vendorState.setToken();
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => MainScreen(),

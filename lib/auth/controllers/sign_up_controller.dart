@@ -6,6 +6,7 @@ import 'package:rental_vendor/auth/models/sign_up_model.dart';
 import 'package:rental_vendor/config/ui/snack_bar.dart';
 import 'package:rental_vendor/constants/constants.dart';
 import 'package:rental_vendor/screens/main_screen.dart';
+import 'package:rental_vendor/screens/sign_in_screen.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,6 +35,8 @@ class SignUpController {
         //   builder: (context) => const Home(),
         // ));
         // pref.getString("authToken");
+        CustomSnackBar(message: "Account Created Successfully").showSnackBar(context);
+        Navigator.of(context).push(MaterialPageRoute(builder:(context)=> const SignInScreen(),),);
       } else {
         CustomSnackBar(message: resData["message"]).showSnackBar(context);
       }

@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rental_vendor/config/ui/snack_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'vendor_model.g.dart';
 
+
 @JsonSerializable()
-class Vendor with ChangeNotifier {
+class Vendor extends GetxController {
   String? name;
 
   @JsonKey(name: "shop_name")
@@ -47,7 +47,6 @@ class Vendor with ChangeNotifier {
     } else {
       throw Exception("Auth Token is null");
     }
-    notifyListeners();
   }
 
   Future<String?> getToken() async {
@@ -62,7 +61,6 @@ class Vendor with ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.remove("AuthToken");
     // print(pref.getString("AuthToken"));
-    notifyListeners();
   }
 
   // Future<void> setVendor({required Vendor vendor}) async {
@@ -96,6 +94,5 @@ class Vendor with ChangeNotifier {
     address = vendor.address;
     authToken = vendor.authToken;
     status = vendor.status;
-    notifyListeners();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_vendor/api/api_model.dart';
 import 'package:rental_vendor/constants/constants.dart';
@@ -10,14 +11,14 @@ class ProductController {
   ApiModel apiModel = ApiModel(baseUrl: baseUrl);
 
   Future<List<Product>> fetchProducts(BuildContext context) async {
-    final vendorProvider = Provider.of<Vendor>(context, listen: false);
-    final businessListProvider =
-        Provider.of<ProductList>(context, listen: false);
+    final Vendor vendorState = Get.find(); // print("object");
+
+    final ProductList productListState = Get.find();
     final resData = await apiModel.fetchApi(
       route: "/products",
-      id: vendorProvider.id,
+      id: vendorState.id,
       whichId: "vendor_id",
-      token: vendorProvider.authToken,
+      token: vendorState.authToken,
     );
 
     // print("${resData['data'][0]['description']} ^^^^^^^^^^^^^^^^^^^^^");
@@ -28,11 +29,11 @@ class ProductController {
         final Product product = Product.fromJson(oneItem);
 
         // print(product.mainThambNail!.mediaLink.runtimeType);
-        businessListProvider.addProducts(product: product);
+        productListState.addProducts(product: product);
       }
     } else {
       throw Exception("Error on product controller ${resData['message']}");
     }
-    return businessListProvider.getBusinessList();
+    return productListState.getProducts();
   }
 }
