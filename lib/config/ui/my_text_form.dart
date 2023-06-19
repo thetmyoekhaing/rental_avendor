@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:rental_vendor/auth/models/sign_up_model.dart';
 
 class MyTextForm extends StatefulWidget {
   final TextEditingController controller;

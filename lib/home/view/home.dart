@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:rental_vendor/config/ui/snack_bar.dart';
 import 'package:rental_vendor/constants/constants.dart';
 import 'package:rental_vendor/home/controllers/drawer_menu_list.dart';
-import 'package:rental_vendor/main.dart';
-import 'package:rental_vendor/screens/main_screen.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
 
 class Home extends StatelessWidget {
@@ -16,7 +14,7 @@ class Home extends StatelessWidget {
     final DateTime tdyDate = DateTime.now();
     final greeding = tdyDate.hour;
     final tdy = DateFormat("yyyy-MMM-dd").format(tdyDate);
-    final vendorProvider = Provider.of<Vendor>(context, listen: false);
+    final Vendor vendorState = Get.find();
     return Scaffold(
       backgroundColor: prussianBlue,
       body: Column(
@@ -76,7 +74,7 @@ class Home extends StatelessWidget {
                 ],
               ),
               title: Text(
-                "Welcome to the Rental Dashboard , ${vendorProvider.name}",
+                "Welcome to the Rental Dashboard , ${vendorState.name}",
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
@@ -116,24 +114,28 @@ class Home extends StatelessWidget {
                           break;
 
                         case 'Log Out':
-                          vendorProvider.removeToken();
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) {
-                              return const MyApp();
-                            },
-                          ));
+                          vendorState.removeToken();
+                          Get.toNamed('/');
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) {
+                          //       return const MyApp();
+                          //     },
+                          //   ),
+                          // );
                           break;
 
                         default:
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return MainScreen(
-                                  body: menu.menuPage,
-                                );
-                              },
-                            ),
-                          );
+                          Get.toNamed(menu.route!);
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (context) {
+                          //       return MainScreen(
+                          //         body: menu.menuPage,
+                          //       );
+                          //     },
+                          //   ),
+                          // );
                           break;
                       }
                     },

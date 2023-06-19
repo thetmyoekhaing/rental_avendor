@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:rental_vendor/api/api_model.dart';
 import 'package:rental_vendor/brands/model/brand_model.dart';
 import 'package:rental_vendor/constants/constants.dart';
@@ -11,7 +10,8 @@ class BrandsController {
 
   Future<List<Brand>> fetchBrands(BuildContext context) async {
     final Vendor vendorState = Get.find(); // print("object");
-final BrandList brandListState = Get.find();    // final vendor = await vendorProvider.getVendor();
+    final BrandList brandListState =
+        Get.find(); // final vendor = await vendorProvider.getVendor();
     // print(vendor);
     final resData = await apiModel.fetchApi(
       route: "/brands",

@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:rental_vendor/api/api_model.dart';
 import 'package:rental_vendor/auth/models/sign_in_model.dart';
 import 'package:rental_vendor/config/ui/snack_bar.dart';
 import 'package:rental_vendor/constants/constants.dart';
-import 'package:rental_vendor/screens/main_screen.dart';
 import 'package:rental_vendor/vendors/models/vendor_model.dart';
 
 class SignInController {
@@ -17,7 +15,7 @@ class SignInController {
   SignInModel signInModel = SignInModel();
 
   Future<void> onPressed(BuildContext context) {
-final Vendor vendorState = Get.find();
+    final Vendor vendorState = Get.find();
     final Completer<void> completer = Completer<void>();
 
     apiModel
@@ -27,11 +25,12 @@ final Vendor vendorState = Get.find();
         final Vendor vendor = Vendor.fromJson(resData["data"]);
         vendorState.addVendorData(vendor: vendor);
         vendorState.setToken();
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => MainScreen(),
-          ),
-        );
+        Get.offNamed('/home');
+        // Navigator.of(context).pushReplacement(
+        //   MaterialPageRoute(
+        //     builder: (context) => MainScreen(),
+        //   ),
+        // );
       } else {
         CustomSnackBar(message: resData["message"]).showSnackBar(context);
       }

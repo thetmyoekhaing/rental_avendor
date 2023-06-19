@@ -1,5 +1,4 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/material.dart';
 import 'package:rental_vendor/auth/views/auth.dart';
 
 class SignInScreen extends StatelessWidget {

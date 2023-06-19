@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:rental_vendor/constants/constants.dart';
 import 'package:rental_vendor/home/controllers/drawer_menu_list.dart';
 import 'package:rental_vendor/screens/main_screen.dart';
@@ -10,8 +10,7 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vendorProvider = Provider.of<Vendor>(context, listen: false);
-
+    final Vendor vendorState = Get.find();
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Container(
@@ -50,29 +49,30 @@ class HomeDrawer extends StatelessWidget {
                           break;
 
                         case 'Log Out':
-                          vendorProvider.removeToken();
-                          Navigator.of(context).pushReplacementNamed('/');
+                          vendorState.removeToken();
+                          Get.toNamed('/');
                           break;
 
                         default:
-                          Navigator.of(context).pushReplacement(
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      MainScreen(
-                                body: menu.menuPage,
-                              ),
-                              transitionDuration:
-                                  const Duration(milliseconds: 500),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+                          Get.toNamed(menu.route!);
+                          // Navigator.of(context).pushReplacement(
+                          //   PageRouteBuilder(
+                          //     pageBuilder:
+                          //         (context, animation, secondaryAnimation) =>
+                          //             MainScreen(
+                          //       body: menu.menuPage,
+                          //     ),
+                          //     transitionDuration:
+                          //         const Duration(milliseconds: 500),
+                          //     transitionsBuilder: (context, animation,
+                          //         secondaryAnimation, child) {
+                          //       return FadeTransition(
+                          //         opacity: animation,
+                          //         child: child,
+                          //       );
+                          //     },
+                          //   ),
+                          // );
                           break;
                         // Navigator.of(context).push(MaterialPageRoute(
                         //   builder: (context) {

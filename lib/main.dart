@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+import 'package:rental_vendor/brands/view/brands.dart';
+import 'package:rental_vendor/business/view/businesses.dart';
+import 'package:rental_vendor/categories/view/categories.dart';
+import 'package:rental_vendor/home/view/profile.dart';
+import 'package:rental_vendor/home/view/user_rent.dart';
+import 'package:rental_vendor/products/view/products.dart';
 import 'package:rental_vendor/providers/provider.dart';
 import 'package:rental_vendor/screens/main_screen.dart';
 import 'package:rental_vendor/screens/no_route_screen.dart';
@@ -26,9 +31,9 @@ class MyApp extends StatelessWidget {
           final String? token = snapshot.data;
           // print("token --> $token");
           if (snapshot.connectionState == ConnectionState.done) {
-            print("token -----> $token");
+            debugPrint("token -----> $token");
             // print(vendorProvider.authToken);
-            return MaterialApp(
+            return GetMaterialApp(
               onGenerateRoute: (settings) {
                 switch (settings.name) {
                   case "/":
@@ -45,6 +50,48 @@ class MyApp extends StatelessWidget {
                   case "/home":
                     return MaterialPageRoute(
                       builder: (context) => MainScreen(),
+                    );
+
+                  case "/brands":
+                    return MaterialPageRoute(
+                      builder: (context) => MainScreen(
+                        body: const Brands(),
+                      ),
+                    );
+
+                  case "/categories":
+                    return MaterialPageRoute(
+                      builder: (context) => MainScreen(
+                        body: const Categories(),
+                      ),
+                    );
+
+                  case "/products":
+                    return MaterialPageRoute(
+                      builder: (context) => MainScreen(
+                        body: const Products(),
+                      ),
+                    );
+
+                  case "/businesses":
+                    return MaterialPageRoute(
+                      builder: (context) => MainScreen(
+                        body: const Businesses(),
+                      ),
+                    );
+
+                  case "/user-rents":
+                    return MaterialPageRoute(
+                      builder: (context) => MainScreen(
+                        body: const UserRent(),
+                      ),
+                    );
+
+                  case "/profile":
+                    return MaterialPageRoute(
+                      builder: (context) => MainScreen(
+                        body: const Profile(),
+                      ),
                     );
 
                   default:

@@ -10,29 +10,44 @@ import 'package:rental_vendor/screens/main_screen.dart';
 
 class DrawerMenuList {
   static List<DrawerModel> menuList = [
-    DrawerModel(icon: Icons.home, menuName: "Home", menuPage: MainScreen()),
     DrawerModel(
-        icon: Icons.shopping_bag, menuName: "Brands", menuPage: const Brands()),
+      route: "/home",
+      icon: Icons.home,
+      menuName: "Home",
+      menuPage: MainScreen(),
+    ),
     DrawerModel(
-        icon: Icons.format_list_numbered,
-        menuName: "Categories",
-        menuPage: const Categories()),
+      route: "/brands",
+      icon: Icons.shopping_bag,
+      menuName: "Brands",
+      menuPage: const Brands(),
+    ),
     DrawerModel(
+      route: "/categories",
+      icon: Icons.format_list_numbered,
+      menuName: "Categories",
+      menuPage: const Categories(),
+    ),
+    DrawerModel(
+      route: "/products",
       icon: Icons.sell,
       menuName: "Products",
       menuPage: const Products(),
     ),
     DrawerModel(
+      route: "/businesses",
       icon: Icons.business_center,
       menuName: "Business",
       menuPage: const Businesses(),
     ),
     DrawerModel(
+      route: "/user-rents",
       icon: Icons.supervised_user_circle,
       menuName: "User Rents",
       menuPage: const UserRent(),
     ),
     DrawerModel(
+      route: '/profile',
       icon: Icons.person,
       menuName: "Profile",
       menuPage: const Profile(),

@@ -9,7 +9,7 @@ class ProductDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("product --> ${product.category![0].name}");
+    debugPrint("product --> ${product.category![0].name}");
     return SafeArea(
       child: Scaffold(
         backgroundColor: white,

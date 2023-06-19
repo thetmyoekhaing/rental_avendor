@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class ApiModel {
   final dio = Dio();
@@ -10,7 +9,7 @@ class ApiModel {
 
   Future<Map<String, dynamic>> fetchApi(
       {String? route, String? id, String? whichId, String? token}) async {
-    print("$id, $whichId, $token");
+    debugPrint("$id, $whichId, $token");
     if (route == null || route == '') {
       return throw Exception("need a route to fetch");
     }
